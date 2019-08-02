@@ -1,0 +1,3 @@
+data "openstack_compute_keypair_v2" "GEIX-Migration-Key" {
+  name = "GEIX-Migration"
+}
