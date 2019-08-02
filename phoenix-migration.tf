@@ -65,16 +65,9 @@ resource "openstack_compute_instance_v2" "vm1" {
     fetch_chef_certificates = true
     http_proxy      = "http://PITC-Zscaler-Americas-Alpharetta3PR.proxy.corporate.ge.com:80"
     https_proxy     = "http://PITC-Zscaler-Americas-Alpharetta3PR.proxy.corporate.ge.com:80"
-<<<<<<< HEAD:phoenix-migration.tf
     no_proxy        = ["github.build.ge.com", "chef-phoenix.vaios.digital.ge.com", "github.com"]
     //run_list        = ["role[phoenix]"]
     run_list        = ["cta_yum::default","phoenix_install_cookbook::default@0.0.6"]
-=======
-    no_proxy        = ["github.build.ge.com", "chef-phoenix.vaios.digital.ge.com"]
-    run_list        = ["role[phoenix]"]
-    // to run a specific cookbook version
-    //run_list        = ["cta_yum::default","phoenix_install_cookbook::default@0.0.6"]
->>>>>>> 2a157f31bbf1fcb81bcc03454117dc42ccccccca:test.tf
     node_name       = "${openstack_compute_instance_v2.vm1.name}"
     //secret_key      = "${file("../encrypted_data_bag_secret")}"
     server_url      = "https://chef-phoenix.vaios.digital.ge.com/organizations/rascl"
