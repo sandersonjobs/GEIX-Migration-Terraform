@@ -10,9 +10,9 @@ provider "openstack" {
 #}
 
 # Create a web server
-resource "openstack_compute_instance_v2" "vm1" {
+resource "openstack_compute_instance_v2" "phoenix-server" {
   count = "1"
-  name = "byron-phoenix-test-server"
+  name = "michael-phoenix-test-server"
   image_id = "6144e0a4-2610-4047-abb0-b728a6ef40a8"
   flavor_id = "094d126c-7ac7-49ad-afeb-53bee704ec93"
   flavor_name = "f1.c4m32"
@@ -38,7 +38,7 @@ resource "openstack_compute_instance_v2" "vm1" {
 //    connection {
 //      type     = "ssh"
 //      user     = "gecloud"
-//      private_key = "${file("../.ssh/os-geix-migration.pem")}"
+//      private_key = "${file("~/.ssh/os-geix-migration.pem")}"
 //    }
 //  }
 
@@ -60,20 +60,20 @@ resource "openstack_compute_instance_v2" "vm1" {
     connection {
       type     = "ssh"
       user     = "gecloud"
-      private_key = "${file("../.ssh/os-geix-migration.pem")}"
+      private_key = "${file("~/.ssh/os-geix-migration.pem")}"
     }
     fetch_chef_certificates = true
     http_proxy      = "http://PITC-Zscaler-Americas-Alpharetta3PR.proxy.corporate.ge.com:80"
     https_proxy     = "http://PITC-Zscaler-Americas-Alpharetta3PR.proxy.corporate.ge.com:80"
     no_proxy        = ["github.build.ge.com", "chef-phoenix.vaios.digital.ge.com", "github.com"]
-    //run_list        = ["role[phoenix]"]
-    run_list        = ["cta_yum::default","phoenix_install_cookbook::default@0.0.6"]
-    node_name       = "${openstack_compute_instance_v2.vm1.name}"
+    run_list        = ["role[phoenix]"]
+    //run_list        = ["cta_yum::default","phoenix_install_cookbook::default@0.0.6"]
+    node_name       = "${openstack_compute_instance_v2.phoenix-server.name}"
     //secret_key      = "${file("../encrypted_data_bag_secret")}"
     server_url      = "https://chef-phoenix.vaios.digital.ge.com/organizations/rascl"
     recreate_client = true
     user_name       = "502755251"
-    user_key        = "${file("../.ssh/chef-service-account.pem")}"
+    user_key        = "${file("~/.ssh/chef-service-account.pem")}"
     client_options = [ "chef_license 'accept'" ]
     version         = "15.0.300"
     # If you have a self signed cert on your chef server change this to :verify_none
