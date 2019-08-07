@@ -1,7 +1,8 @@
 # Create Phoenix Loadbalancer
 resource "openstack_lb_loadbalancer_v2" "phoenix-lb" {
-  vip_subnet_id = "2d4168b2-0c5d-450a-85cc-bcaf8bc6d2b4"
-  #name = "phoenix-lb"
+  vip_subnet_id = "bd6e5922-b179-4f18-b499-9e76efa290ae"
+  name = "phoenix-lb"
+  region     = "US-EAST2"
   depends_on      = [
     "openstack_compute_instance_v2.phoenix-server"
   ]
@@ -36,7 +37,7 @@ resource "openstack_lb_member_v2" "phoenix-lb_member" {
   address         = "${element(openstack_compute_instance_v2.phoenix-server.*.access_ip_v4, count.index)}"
   protocol_port   = 80
   pool_id         = "${openstack_lb_pool_v2.phoenix-lb_pool.id}"
-  subnet_id       = "2d4168b2-0c5d-450a-85cc-bcaf8bc6d2b4"
+  subnet_id       = "bd6e5922-b179-4f18-b499-9e76efa290ae"
   depends_on      = [
       "openstack_lb_pool_v2.phoenix-lb_pool",
     ]
