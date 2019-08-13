@@ -18,18 +18,18 @@ resource "openstack_networking_subnet_v2" "phoenix-subnet" {
 	"10.220.220.220i",
 	"10.220.220.221",
 	]
-  depends_on            = [
-    "openstack_networking_network_v2.phoenix-network",
-  ]
+//  depends_on            = [
+//    "openstack_networking_network_v2.phoenix-network",
+//  ]
 }
 
 # Router creation
 resource "openstack_networking_router_v2" "phoenix-router" {
   name                = "NRTR01-GEIX-ATL1-CRP1-Private-PRD05-Phoenix"
   external_network_id = "${openstack_networking_network_v2.phoenix-network.id}"
-  depends_on            = [
-    "openstack_networking_network_v2.phoenix-network",
-  ]
+//  depends_on            = [
+//    "openstack_networking_network_v2.phoenix-network",
+//  ]
 }
 
 # Router interface configuration
@@ -38,7 +38,7 @@ resource "openstack_networking_router_interface_v2" "phoenix-routerinterface" {
   router_id = "${openstack_networking_router_v2.phoenix-router.id}"
   external_network_id = "${openstack_networking_network_v2.phoenix-network.id}"
   subnet_id           = "${openstack_networking_subnet_v2.phoenix-subnet.id}"
-  depends_on		= [
-    "openstack_networking_subnet_v2.phoenix-subnet",
-  ]
+//  depends_on		= [
+//    "openstack_networking_subnet_v2.phoenix-subnet",
+//  ]
 }
