@@ -15,7 +15,7 @@ resource "openstack_networking_subnet_v2" "phoenix-subnet" {
   gateway_ip          = "10.153.17.1"
   #dns_nameservers     = "${var.dns_ip}"
   dns_nameservers     = [
-	"10.220.220.220i",
+	"10.220.220.220",
 	"10.220.220.221",
 	]
   depends_on            = [
