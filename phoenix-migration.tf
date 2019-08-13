@@ -37,8 +37,8 @@ resource "openstack_compute_instance_v2" "phoenix-server" {
     http_proxy      = "http://PITC-Zscaler-Americas-Alpharetta3PR.proxy.corporate.ge.com:80"
     https_proxy     = "http://PITC-Zscaler-Americas-Alpharetta3PR.proxy.corporate.ge.com:80"
     no_proxy        = ["github.build.ge.com", "chef-phoenix.vaios.digital.ge.com", "github.com"]
-    run_list        = ["role[phoenix]"]
-    //run_list        = ["cta_yum::default","phoenix_install_cookbook::default@0.0.6"]
+    //run_list        = ["role[phoenix]"]
+    run_list        = ["cta_yum::default","phoenix_install_cookbook::default@0.0.9"]
     node_name       = "${openstack_compute_instance_v2.phoenix-server.name}"
     server_url      = "https://chef-phoenix.vaios.digital.ge.com/organizations/rascl"
     recreate_client = true

@@ -1,3 +1,13 @@
+# Create Floating IP for Phoenix Loadbalancer
+resource "openstack_networking_floatingip_v2" "phoenix-lb_floatingip_1" {
+  #address	= "192.168.0.4"
+  pool		= "GEIX-ATL1-CRP1-Internal"
+  fixed_ip	= "${openstack_lb_loadbalancer_v2.phoenix-lb.vip_address}"
+  depends_on	= [
+    "openstack_lb_loadbalancer_v2.phoenix-lb",
+  ]
+}
+
 # Create Phoenix Loadbalancer
 resource "openstack_lb_loadbalancer_v2" "phoenix-lb" {
   vip_subnet_id = "bd6e5922-b179-4f18-b499-9e76efa290ae"
