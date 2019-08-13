@@ -1,6 +1,9 @@
 # Network creation
 resource "openstack_networking_network_v2" "phoenix-network" {
   name                = "GEIX-ATL1-CRP1-Internal-Phoenix"
+  shared              = true
+  admin_state_up      = true
+  external            = true
 }
 
 #### HTTP SUBNET ####
