@@ -16,6 +16,9 @@ resource "openstack_networking_port_v2" "static_ip_port" {
     ip_address = "10.153.16.50",
     subnet_id = "bd6e5922-b179-4f18-b499-9e76efa290ae"
   }
+  binding = {
+    host_id = "${openstack_lb_loadbalancer_v2.phoenix-lb.id}"
+  }
 }
 
 # Create Phoenix Loadbalancer
@@ -23,7 +26,7 @@ resource "openstack_lb_loadbalancer_v2" "phoenix-lb" {
   vip_subnet_id = "bd6e5922-b179-4f18-b499-9e76efa290ae"
   name = "phoenix-lb"
   region     = "US-EAST2"
-  vip_address = "10.153.16.50"
+  vip_address = "${openstack_networking_port_v2.static_ip_port.all_fixed_ips}"
   depends_on      = [
     "openstack_compute_instance_v2.phoenix-server",
   ]
