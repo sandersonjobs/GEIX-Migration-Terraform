@@ -17,7 +17,7 @@ resource "openstack_lb_loadbalancer_v2" "phoenix-lb" {
   vip_address = "${openstack_networking_port_v2.phoenix-lb_static_ip_port.fixed_ip}"
   depends_on      = [
     "openstack_compute_instance_v2.phoenix-server",
-    "openstack_networking_port_v2.phoenix-lb_static_ip_port"
+    #"openstack_networking_port_v2.phoenix-lb_static_ip_port"
   ]
 }
 
