@@ -4,17 +4,6 @@ provider "openstack" {
   use_octavia = "true"
 }
 
-# Create port for static IP for LB
-resource "openstack_networking_port_v2" "phoenix-lb_static_ip_port" {
-  name = "phoenix-lb_static_ip_port"
-  network_id = "2d4168b2-0c5d-450a-85cc-bcaf8bc6d2b4"
-  admin_state_up = "true"
-  fixed_ip {
-    subnet_id = "bd6e5922-b179-4f18-b499-9e76efa290ae",
-    ip_address = "10.153.16.50"
-  }
-}
-
 # Create a web server
 resource "openstack_compute_instance_v2" "phoenix-server" {
   count = "1"
@@ -57,8 +46,4 @@ resource "openstack_compute_instance_v2" "phoenix-server" {
     # If you have a self signed cert on your chef server change this to :verify_none
     ssl_verify_mode = ":verify_none"
   }
-  depends_on      = [
-    "openstack_networking_port_v2.phoenix-lb_static_ip_port",
-  ]
-
 }
