@@ -1,20 +1,20 @@
 # Create port for static IP for LB
-resource "openstack_networking_port_v2" "phoenix-lb_static_ip_port" {
-  name = "phoenix-lb_static_ip_port"
-  network_id = "2d4168b2-0c5d-450a-85cc-bcaf8bc6d2b4"
-  admin_state_up = "true"
-  fixed_ip {
-    subnet_id = "bd6e5922-b179-4f18-b499-9e76efa290ae",
-    ip_address = "10.153.16.50"
-  }
+//resource "openstack_networking_port_v2" "phoenix-lb_static_ip_port" {
+//  name = "phoenix-lb_static_ip_port"
+//  network_id = "2d4168b2-0c5d-450a-85cc-bcaf8bc6d2b4"
+//  admin_state_up = "true"
+//  fixed_ip {
+//    subnet_id = "bd6e5922-b179-4f18-b499-9e76efa290ae",
+//    ip_address = "10.153.16.50"
+//  }
+//}
 
-}
 # Create Phoenix Loadbalancer
 resource "openstack_lb_loadbalancer_v2" "phoenix-lb" {
   vip_subnet_id = "bd6e5922-b179-4f18-b499-9e76efa290ae"
   name = "phoenix-lb"
   region     = "US-EAST2"
-  vip_address = "${openstack_networking_port_v2.phoenix-lb_static_ip_port.fixed_ip}"
+  #vip_address = "${openstack_networking_port_v2.phoenix-lb_static_ip_port.fixed_ip}"
   depends_on      = [
     "openstack_compute_instance_v2.phoenix-server",
     #"openstack_networking_port_v2.phoenix-lb_static_ip_port"
