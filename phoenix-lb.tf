@@ -11,7 +11,7 @@
 resource "openstack_networking_port_v2" "static_ip_port" {
   name = "static_ip_port"
   network_id = "2d4168b2-0c5d-450a-85cc-bcaf8bc6d2b4"
-  admin_state_up = "true,"
+  admin_state_up = true
   fixed_ip = {
     ip_address = "10.153.16.50",
     subnet_id = "bd6e5922-b179-4f18-b499-9e76efa290ae"
