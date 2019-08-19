@@ -41,7 +41,7 @@ resource "openstack_networking_floatingip_associate_v2" "attach_phoenix-lb_fip" 
 
 # Create Phoenix Loadbalancer
 resource "openstack_lb_loadbalancer_v2" "phoenix-lb" {
-  vip_subnet_id = "f9488a92-288b-4f44-ad1e-ceb5590f1202"
+  vip_subnet_id = "dcc1b79f-306c-4552-b237-a0d2ec8e1b81"
   name = "phoenix-lb"
   region     = "US-EAST2"
   #vip_subnet_id = "${openstack_networking_port_v2.static_ip_port.all_fixed_ips}"
