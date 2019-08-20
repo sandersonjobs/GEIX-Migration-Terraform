@@ -8,18 +8,18 @@
 //}
 
 # Create port for static IP for LB
-resource "openstack_networking_port_v2" "static_ip_port" {
-  name = "static_ip_port"
-  network_id = "2d4168b2-0c5d-450a-85cc-bcaf8bc6d2b4"
-  admin_state_up = true
-  fixed_ip {
-    ip_address = "10.153.16.50",
-    subnet_id = "bd6e5922-b179-4f18-b499-9e76efa290ae"
-  }
-//  binding = {
-//    host_id = "${openstack_lb_loadbalancer_v2.phoenix-lb.id}"
+//resource "openstack_networking_port_v2" "static_ip_port" {
+//  name = "static_ip_port"
+//  network_id = "2d4168b2-0c5d-450a-85cc-bcaf8bc6d2b4"
+//  admin_state_up = true
+//  fixed_ip {
+//    ip_address = "10.153.16.50",
+//    subnet_id = "bd6e5922-b179-4f18-b499-9e76efa290ae"
 //  }
-}
+////  binding = {
+////    host_id = "${openstack_lb_loadbalancer_v2.phoenix-lb.id}"
+////  }
+//}
 
 //resource "openstack_lb_vip_v1" "phoenix-lb_vip" {
 //  name      = "phoenix-lb_vip"
@@ -31,7 +31,8 @@ resource "openstack_networking_port_v2" "static_ip_port" {
 
 resource "openstack_networking_floatingip_v2" "phoenix-lb_fip" {
   pool = "GEIX-ATL1-CRP1-Internal"
-  port_id = "${openstack_networking_port_v2.static_ip_port.id}"
+  description = "Loadbalancer Floating IP"
+  #port_id = "${openstack_networking_port_v2.static_ip_port.id}"
 }
 
 resource "openstack_networking_floatingip_associate_v2" "attach_phoenix-lb_fip" {
