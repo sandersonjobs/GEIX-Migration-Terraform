@@ -36,8 +36,8 @@ resource "openstack_networking_floatingip_v2" "phoenix-lb_fip" {
 }
 
 resource "openstack_networking_floatingip_associate_v2" "attach_phoenix-lb_fip" {
-  floating_ip = "${openstack_lb_loadbalancer_v2.phoenix-lb.vip_address}"
-  port_id     = "${openstack_networking_floatingip_v2.phoenix-lb_fip.port_id}"
+  floating_ip = "${openstack_networking_floatingip_v2.phoenix-lb_fip.address}"
+  port_id     = "${openstack_lb_loadbalancer_v2.phoenix-lb.vip_port_id}"
 }
 
 # Create Phoenix Loadbalancer
