@@ -35,7 +35,6 @@ variable "chef_data" {
     chef_server_url = "https://chef-phoenix.vaios.digital.ge.com/organizations/rascl"
     chef_user = "502755251"
     recreate_client = true
-    chef_client_options = [ "chef_license 'accept'" ]
     ssl_verify = ":verify_none"
   }
 }
@@ -47,4 +46,5 @@ locals {
   security_groups = ["a22861ac-6a1f-40d3-8114-2f76880cb9ee", "fbfa7825-1b83-4c3e-93ee-188c85224717", "d0ae75b4-76ec-46e1-8fbb-d9e257f936f5"]
   no_proxy = ["github.build.ge.com", "chef-phoenix.vaios.digital.ge.com", "github.com"]
   run_list = ["role[phoenix]"]
+  chef_client_options = [ "chef_license 'accept'" ]
 }
