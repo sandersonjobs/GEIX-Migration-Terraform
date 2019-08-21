@@ -8,20 +8,20 @@ provider "openstack" {
 resource "openstack_compute_instance_v2" "phoenix-server" {
   count = "1"
   name = "michael-phoenix-test-server"
-  image_id = "${var.openstack_data.os_image_id}"
-  flavor_id = "${var.openstack_data.os_flavor_id}"
-  flavor_name = "${var.openstack_data.os_flavor_name}"
+  image_id = "${var.openstack_data["os_image_id"]}"
+  flavor_id = "${var.openstack_data["os_flavor_id"]}"
+  flavor_name = "${var.openstack_data["os_flavor_name"]}"
   key_pair = "${local.key_pair}"
-  security_groups = "${var.network_data.security_groups}"
+  security_groups = "${var.network_data["security_groups"]}"
 
   network {
-    name = "${var.network_data.internal_network_name}"
+    name = "${var.network_data["internal_network_name"]}"
   }
 
   metadata {
-    env = "${var.metadata.env}"
-    uai = "${var.metadata.uai}"
-    license = "${var.metadata.license}"
+    env = "${var.metadata["env"]}"
+    uai = "${var.metadata["uai"]}"
+    license = "${var.metadata["license"]}"
   }
 
   provisioner "chef" {
@@ -31,19 +31,19 @@ resource "openstack_compute_instance_v2" "phoenix-server" {
       private_key = "${local.os_migration_key}"
     }
     fetch_chef_certificates = true
-    http_proxy      = "${var.network_data.network_proxy}"
-    https_proxy     = "${var.network_data.network_proxy}"
-    no_proxy        = "${var.network_data.no_proxy}"
-    run_list        = "${var.chef_data.run_list}"
+    http_proxy      = "${var.network_data["network_proxy"]}"
+    https_proxy     = "${var.network_data["network_proxy"]}"
+    no_proxy        = "${var.network_data["no_proxy"]}"
+    run_list        = "${var.chef_data["run_list"]}"
     //run_list        = ["cta_yum::default","phoenix_install_cookbook::default@0.0.10"]
     node_name       = "${openstack_compute_instance_v2.phoenix-server.name}"
-    server_url      = "${var.chef_data.chef_server_url}"
-    recreate_client = "${var.chef_data.recreate_client}"
-    user_name       = "${var.chef_data.chef_user}"
+    server_url      = "${var.chef_data["chef_server_url"]}"
+    recreate_client = "${var.chef_data["recreate_client"]}"
+    user_name       = "${var.chef_data["chef_user"]}"
     user_key        = "${local.chef_service_key}"
-    client_options = "${var.chef_data.chef_client_options}"
-    version         = "${var.chef_data.client_version}"
+    client_options = "${var.chef_data["chef_client_options"]}"
+    version         = "${var.chef_data["client_version"]}"
     # If you have a self signed cert on your chef server change this to :verify_none
-    ssl_verify_mode = "${var.chef_data.ssl_verify}"
+    ssl_verify_mode = "${var.chef_data["ssl_verify"]}"
   }
 }
