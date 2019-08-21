@@ -33,8 +33,8 @@ resource "openstack_compute_instance_v2" "phoenix-server" {
     fetch_chef_certificates = true
     http_proxy      = "${var.network_data["network_proxy"]}"
     https_proxy     = "${var.network_data["network_proxy"]}"
-    no_proxy        = "${var.network_data["no_proxy"]}"
-    run_list        = "${var.chef_data["run_list"]}"
+    no_proxy        = "${local.no_proxy}"
+    run_list        = "${local.run_list}"
     //run_list        = ["cta_yum::default","phoenix_install_cookbook::default@0.0.10"]
     node_name       = "${openstack_compute_instance_v2.phoenix-server.name}"
     server_url      = "${var.chef_data["chef_server_url"]}"
