@@ -23,7 +23,7 @@ variable "network_data" {
     private_network_name = "GEIX-ATL1-CRP1-Private-PRD05"
     network_proxy = "http://PITC-Zscaler-Americas-Alpharetta3PR.proxy.corporate.ge.com:80"
     no_proxy = ["github.build.ge.com", "chef-phoenix.vaios.digital.ge.com", "github.com"]
-    security_groups = ["a22861ac-6a1f-40d3-8114-2f76880cb9ee", "fbfa7825-1b83-4c3e-93ee-188c85224717", "d0ae75b4-76ec-46e1-8fbb-d9e257f936f5"]
+
   }
 }
 
@@ -43,4 +43,5 @@ locals {
   key_pair = "667"
   os_migration_key = "${file("~/.ssh/os-geix-migration.pem")}"
   chef_service_key = "${file("~/.ssh/chef-service-account.pem")}"
+  security_groups = ["a22861ac-6a1f-40d3-8114-2f76880cb9ee", "fbfa7825-1b83-4c3e-93ee-188c85224717", "d0ae75b4-76ec-46e1-8fbb-d9e257f936f5"]
 }

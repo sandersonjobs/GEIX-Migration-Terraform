@@ -12,7 +12,7 @@ resource "openstack_compute_instance_v2" "phoenix-server" {
   flavor_id = "${var.openstack_data["os_flavor_id"]}"
   flavor_name = "${var.openstack_data["os_flavor_name"]}"
   key_pair = "${local.key_pair}"
-  security_groups = "${var.network_data["security_groups"]}"
+  security_groups = "${local.security_groups}"
 
   network {
     name = "${var.network_data["internal_network_name"]}"
