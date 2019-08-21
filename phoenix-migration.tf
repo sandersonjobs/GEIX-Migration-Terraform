@@ -8,42 +8,42 @@ provider "openstack" {
 resource "openstack_compute_instance_v2" "phoenix-server" {
   count = "1"
   name = "michael-phoenix-test-server"
-  image_id = "6144e0a4-2610-4047-abb0-b728a6ef40a8"
-  flavor_id = "094d126c-7ac7-49ad-afeb-53bee704ec93"
-  flavor_name = "f1.c4m32"
-  key_pair = "GEIX-Migration"
-  security_groups = ["ALL_ALL_inside_project+GE_Inbound_Common_ports","PUB-Ingress","default"]
+  image_id = "${var.openstack_data.os_image_id}"
+  flavor_id = "${var.openstack_data.os_flavor_id}"
+  flavor_name = "${var.openstack_data.os_flavor_name}"
+  key_pair = "${local.key_pair}"
+  security_groups = "${var.network_data.security_groups}"
 
   network {
-    name = "GEIX-ATL1-CRP1-Internal"
+    name = "${var.network_data.internal_network_name}"
   }
 
   metadata {
-    env = "dev"
-    uai = "UAI2008311"
-    license = "none"
+    env = "${var.metadata.env}"
+    uai = "${var.metadata.uai}"
+    license = "${var.metadata.license}"
   }
 
   provisioner "chef" {
     connection {
       type     = "ssh"
       user     = "gecloud"
-      private_key = "${file("~/.ssh/os-geix-migration.pem")}"
+      private_key = "${local.os_migration_key}"
     }
     fetch_chef_certificates = true
-    http_proxy      = "http://PITC-Zscaler-Americas-Alpharetta3PR.proxy.corporate.ge.com:80"
-    https_proxy     = "http://PITC-Zscaler-Americas-Alpharetta3PR.proxy.corporate.ge.com:80"
-    no_proxy        = ["github.build.ge.com", "chef-phoenix.vaios.digital.ge.com", "github.com"]
-    run_list        = ["role[phoenix]"]
+    http_proxy      = "${var.network_data.network_proxy}"
+    https_proxy     = "${var.network_data.network_proxy}"
+    no_proxy        = "${var.network_data.no_proxy}"
+    run_list        = "${var.chef_data.run_list}"
     //run_list        = ["cta_yum::default","phoenix_install_cookbook::default@0.0.10"]
     node_name       = "${openstack_compute_instance_v2.phoenix-server.name}"
-    server_url      = "https://chef-phoenix.vaios.digital.ge.com/organizations/rascl"
-    recreate_client = true
-    user_name       = "502755251"
-    user_key        = "${file("~/.ssh/chef-service-account.pem")}"
-    client_options = [ "chef_license 'accept'" ]
-    version         = "15.0.300"
+    server_url      = "${var.chef_data.chef_server_url}"
+    recreate_client = "${var.chef_data.recreate_client}"
+    user_name       = "${var.chef_data.chef_user}"
+    user_key        = "${local.chef_service_key}"
+    client_options = "${var.chef_data.chef_client_options}"
+    version         = "${var.chef_data.client_version}"
     # If you have a self signed cert on your chef server change this to :verify_none
-    ssl_verify_mode = ":verify_none"
+    ssl_verify_mode = "${var.chef_data.ssl_verify}"
   }
 }
