@@ -15,7 +15,7 @@ resource "openstack_compute_instance_v2" "phoenix-server" {
   security_groups = "${local.security_groups}"
 
   network {
-    name = "${var.network_data["internal_network_name"]}"
+    name = "${var.network_data["private_network_name"]}"
   }
 
   metadata {
