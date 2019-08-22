@@ -52,7 +52,7 @@ variable "loadbalancer_data" {
     lb_name = "phoenix_lb"
     desired_member_capacity = 3
     listener_name = "listener_http"
-    listerner_protocol = "TCP"
+    listener_protocol = "TCP"
     listener_protocol_port = 80
     pool_name = "pool_http"
     pool_protocol = "TCP"
