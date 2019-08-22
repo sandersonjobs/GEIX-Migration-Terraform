@@ -1,6 +1,6 @@
 provider "openstack" {
   region     = "${var.openstack_data["region"]}"
-  version = "${local.openstack_version}"
+  version = "~> 1.17"
   use_octavia = "${var.openstack_data["use_octavia"]}"
 }
 
