@@ -5,7 +5,6 @@ variable "openstack_data" {
   type = "map"
   default = {
     region = "US-EAST2"
-    version = "~> 1.17"
     use_octavia = "true"
     os_image_id = "6144e0a4-2610-4047-abb0-b728a6ef40a8"
     os_flavor_id = "094d126c-7ac7-49ad-afeb-53bee704ec93"
@@ -71,6 +70,7 @@ variable "loadbalancer_data" {
 # Random Local Variables (since lists and maps cannot coexist in a variable
 locals {
   desired_appserver_count = 1
+  openstack_version = "~> 1.17"
   key_pair = "GEIX-Migration"
   os_migration_key = "${file("~/.ssh/os-geix-migration.pem")}"
   chef_service_key = "${file("~/.ssh/chef-service-account.pem")}"
