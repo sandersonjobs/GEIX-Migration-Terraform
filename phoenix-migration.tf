@@ -1,12 +1,12 @@
 provider "openstack" {
-  region     = "US-EAST2"
-  version = "~> 1.17"
-  use_octavia = "true"
+  region     = "${var.openstack_data["region"]}"
+  version = "${var.openstack_data["version"]}"
+  use_octavia = "${var.openstack_data["use_octavia"]}"
 }
 
 # Create a web server
 resource "openstack_compute_instance_v2" "phoenix-server" {
-  count = "1"
+  count = "${local.desired_appserver_count}"
   name = "michael-phoenix-test-server"
   image_id = "${var.openstack_data["os_image_id"]}"
   flavor_id = "${var.openstack_data["os_flavor_id"]}"
