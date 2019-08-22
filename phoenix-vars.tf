@@ -75,7 +75,7 @@ locals {
   key_pair = "GEIX-Migration"
   os_migration_key = "${file("~/.ssh/os-geix-migration.pem")}"
   chef_service_key = "${file("~/.ssh/chef-service-account.pem")}"
-  security_groups = ["a22861ac-6a1f-40d3-8114-2f76880cb9ee", "fbfa7825-1b83-4c3e-93ee-188c85224717", "d0ae75b4-76ec-46e1-8fbb-d9e257f936f5"]
+  security_groups = ["ALL_ALL_inside_project+GE_Inbound_Common_ports", "PUB-Ingress", "default"]
   no_proxy = ["github.build.ge.com", "chef-phoenix.vaios.digital.ge.com", "github.com"]
   run_list = ["role[phoenix]"]
   chef_client_options = [ "chef_license 'accept'" ]
