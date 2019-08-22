@@ -49,7 +49,7 @@ variable "chef_data" {
 variable "loadbalancer_data" {
   type = "map"
   default = {
-    lb_name = "phoenix_lb"
+    lb_name = "phoenix-lb"
     desired_member_capacity = 3
     listener_name = "listener_http"
     listener_protocol = "TCP"
