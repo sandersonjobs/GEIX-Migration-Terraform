@@ -50,7 +50,7 @@ variable "loadbalancer_data" {
   type = "map"
   default = {
     lb_name = "phoenix-lb"
-    desired_member_capacity = 3
+    desired_member_capacity = 1
     listener_name = "listener_http"
     listener_protocol = "TCP"
     listener_protocol_port = 80
