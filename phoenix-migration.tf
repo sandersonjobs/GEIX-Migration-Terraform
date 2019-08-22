@@ -7,7 +7,7 @@ provider "openstack" {
 # Create a web server
 resource "openstack_compute_instance_v2" "phoenix-server" {
   count = "${local.desired_appserver_count}"
-  name = "michael-phoenix-test-server"
+  name = "${local.appserver_name}"
   image_id = "${var.openstack_data["os_image_id"]}"
   flavor_id = "${var.openstack_data["os_flavor_id"]}"
   flavor_name = "${var.openstack_data["os_flavor_name"]}"

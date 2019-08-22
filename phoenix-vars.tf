@@ -70,6 +70,7 @@ variable "loadbalancer_data" {
 # Random Local Variables (since lists and maps cannot coexist in a variable
 locals {
   desired_appserver_count = 1
+  appserver_name = "michael-phoenix-test-server"
   openstack_version = "~> 1.17"
   key_pair = "GEIX-Migration"
   os_migration_key = "${file("~/.ssh/os-geix-migration.pem")}"
