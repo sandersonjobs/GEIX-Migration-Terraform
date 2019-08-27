@@ -73,6 +73,7 @@ locals {
   appserver_name = "michael-phoenix-test-server"
   openstack_version = "~> 1.17"
   key_pair = "GEIX-Migration"
+  dbag_enc_key = "${file("~/.ssh/dbag_enc_key.pub")}"
   os_migration_key = "${file("~/.ssh/os-geix-migration.pem")}"
   chef_service_key = "${file("~/.ssh/chef-service-account.pem")}"
   security_groups = ["ALL_ALL_inside_project+GE_Inbound_Common_ports", "PUB-Ingress", "default"]

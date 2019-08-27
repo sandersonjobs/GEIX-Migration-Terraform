@@ -41,6 +41,7 @@ resource "openstack_compute_instance_v2" "phoenix-server" {
     recreate_client = "${var.chef_data["recreate_client"]}"
     user_name       = "${var.chef_data["chef_user"]}"
     user_key        = "${local.chef_service_key}"
+    secret_key      = "${local.dbag_enc_key}"
     client_options = "${local.chef_client_options}"
     version         = "${var.chef_data["client_version"]}"
     # If you have a self signed cert on your chef server change this to :verify_none
