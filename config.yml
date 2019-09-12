@@ -1,7 +1,0 @@
-creds:
-  username: 502755251
-  password: d8h0lAxy
-keystone_auth:
-  keystone_url: https://us-east2.geix.cloud.ge.com:13000
-  shibboleth_Uri: /v3/auth/OS-FEDERATION/websso/mapped?origin=https://us-east2.geix.cloud.ge.com/dashboard/auth/websso/
-  project_id: ee0ea8bc0f874e4aad734202bd65b33c
