@@ -71,6 +71,7 @@ variable "loadbalancer_data" {
 locals {
   desired_appserver_count = 1
   appserver_name = "michael-phoenix-test-server"
+  jenkins_server_name = "jenkins_pipeline-server"
   openstack_version = "~> 1.17"
   key_pair = "GEIX-Migration"
   dbag_enc_key = "${file("~/.ssh/dbag_enc_key.pub")}"
