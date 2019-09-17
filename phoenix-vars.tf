@@ -79,6 +79,7 @@ locals {
   chef_service_key = "${file("~/.ssh/chef-service-account.pem")}"
   security_groups = ["ALL_ALL_inside_project+GE_Inbound_Common_ports", "PUB-Ingress", "default"]
   no_proxy = ["github.build.ge.com", "chef-phoenix.vaios.digital.ge.com", "github.com"]
-  run_list = ["role[phoenix]"]
+  phoenix_run_list = ["role[phoenix]"]
+  jenkins_run_list = ["cta_yum::default","deploy_phoenix_terraform::default"]
   chef_client_options = [ "chef_license 'accept'" ]
 }
