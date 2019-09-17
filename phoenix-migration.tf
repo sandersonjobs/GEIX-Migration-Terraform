@@ -26,7 +26,7 @@ resource "openstack_compute_instance_v2" "phoenix-server" {
   provisioner "chef" {
     connection {
       type     = "ssh"
-      host = "${openstack_compute_instance_v2.phoenix-server.access_ip_v4}"
+      host = "${openstack_compute_instance_v2.phoenix-server[count.index].access_ip_v4}"
       user     = "gecloud"
       private_key = "${local.os_migration_key}"
     }
@@ -36,7 +36,7 @@ resource "openstack_compute_instance_v2" "phoenix-server" {
     no_proxy        = "${local.no_proxy}"
     run_list        = "${local.phoenix_run_list}"
     //run_list        = ["cta_yum::default","phoenix_install_cookbook::default@0.0.10"]
-    node_name       = "${openstack_compute_instance_v2.phoenix-server.name}"
+    node_name       = "${openstack_compute_instance_v2.phoenix-server[count.index].name}"
     server_url      = "${var.chef_data["chef_server_url"]}"
     recreate_client = "${var.chef_data["recreate_client"]}"
     user_name       = "${var.chef_data["chef_user"]}"
