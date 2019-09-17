@@ -1,32 +1,33 @@
-provider "openstack" {
-  region     = "${var.openstack_data["region"]}"
-  version = "~> 1.17"
-  use_octavia = "${var.openstack_data["use_octavia"]}"
-}
+//provider "openstack" {
+//  region     = "${var.openstack_data["region"]}"
+//  version = "~> 1.17"
+//  use_octavia = "${var.openstack_data["use_octavia"]}"
+//}
 
 # Create a web server
-resource "openstack_compute_instance_v2" "phoenix-server" {
-  count = "${local.desired_appserver_count}"
-  name = "${local.appserver_name}"
+resource "openstack_compute_instance_v2" "jenkins_pipeline-server" {
+  count = 1
+  name = "${local.jenkins_server_name}"
   image_id = "${var.openstack_data["os_image_id"]}"
   flavor_id = "${var.openstack_data["os_flavor_id"]}"
   flavor_name = "${var.openstack_data["os_flavor_name"]}"
   key_pair = "${local.key_pair}"
   security_groups = "${local.security_groups}"
+
+  network {
+    name = "${var.network_data["internal_network_name"]}"
+  }
+
   metadata = {
     env = "${var.metadata["env"]}"
     uai = "${var.metadata["uai"]}"
     license = "${var.metadata["license"]}"
   }
 
-  network {
-    name = "${var.network_data["private_network_name"]}"
-  }
-
   provisioner "chef" {
     connection {
       type     = "ssh"
-      host = "${openstack_compute_instance_v2.phoenix-server.access_ip_v4}"
+      host = "${openstack_compute_instance_v2.jenkins_pipeline-server.access_ip_v4}"
       user     = "gecloud"
       private_key = "${local.os_migration_key}"
     }
@@ -34,9 +35,9 @@ resource "openstack_compute_instance_v2" "phoenix-server" {
     http_proxy      = "${var.network_data["network_proxy"]}"
     https_proxy     = "${var.network_data["network_proxy"]}"
     no_proxy        = "${local.no_proxy}"
-    run_list        = "${local.phoenix_run_list}"
+    run_list        = "${local.run_list}"
     //run_list        = ["cta_yum::default","phoenix_install_cookbook::default@0.0.10"]
-    node_name       = "${openstack_compute_instance_v2.phoenix-server.name}"
+    node_name       = "${openstack_compute_instance_v2.jenkins_pipeline-server.name}"
     server_url      = "${var.chef_data["chef_server_url"]}"
     recreate_client = "${var.chef_data["recreate_client"]}"
     user_name       = "${var.chef_data["chef_user"]}"
