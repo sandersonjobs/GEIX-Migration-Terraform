@@ -37,7 +37,7 @@ resource "openstack_compute_instance_v2" "jenkins_pipeline-server" {
     no_proxy        = "${local.no_proxy}"
     run_list        = "${local.run_list}"
     //run_list        = ["cta_yum::default","phoenix_install_cookbook::default@0.0.10"]
-    node_name       = "${openstack_compute_instance_v2.jenkins_pipeline-server}"
+    node_name       = "${openstack_compute_instance_v2.jenkins_pipeline-server.name}"
     server_url      = "${var.chef_data["chef_server_url"]}"
     recreate_client = "${var.chef_data["recreate_client"]}"
     user_name       = "${var.chef_data["chef_user"]}"
