@@ -1,0 +1,6 @@
+samlrc
+*.tfstate*
+.terraform/
+.idea/
+env_vars.sh
+logs/
