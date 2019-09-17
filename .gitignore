@@ -1,5 +1,4 @@
 samlrc
-config.yml
 *.tfstate*
 .terraform/
 .idea/
