@@ -1,2 +1,2 @@
 # Migration-Terraform
-Terraform Deployments for GEIX Migration
+Terraform Deployments for Migration
