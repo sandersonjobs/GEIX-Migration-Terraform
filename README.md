@@ -1,2 +1,2 @@
-# GEIX-Migration-Terraform
+# Migration-Terraform
 Terraform Deployments for GEIX Migration
